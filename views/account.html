@@ -22,7 +22,7 @@ url : "/",
 contentType : "application/json",
 success : function(data, textStatus, jqXHR) {
 console.log("User is: " + data);
-$(".user_header").append('<a href="/account" data-rel="page"  class="ui-btn-left"\
+$(".user_header").append('<a href="#login" data-rel="page"  class="ui-btn-left"\
 style="color: #FFFFFF" >Welcome ' + data + '!   </a>');
 
 },
@@ -38,27 +38,16 @@ console.log("try again");
 
 			</div>
 
-			<div align="center">
-				<img src="images/generic_background.png"/>
+			<div data-role="controlgroup">
+				<a href="index.html" data-role="button">Bids</a>
+				<a href="index.html" data-role="button">Sold Items</a>
+				<a href="index.html" data-role="button">Payment</a>
+				<a href="index.html" data-role="button">Ranking</a>
+				
 			</div>
-			<div align="center"  class="home_tagline">
-				Service sharing from anywhere
-			</div>
-			<a href="#search">Search</a>
-		</div>
+
 		</div>
 
-		<!-- Search page -->
-		<div id ="search" data-role="page">
-			<div data-role="header" data-theme="a" data-position="fixed">
-				<h1>Items</h1>
-			</div>
-			<div data-role="content">
-				<h3 style="text-align: center">Items for Sales</h3>
-				<ul id="items-list" data-role="listview" data-inset="true"></ul>
-
-			</div>
-		</div>
 	</body>
 
 </html>

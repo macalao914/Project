@@ -13,6 +13,21 @@ var users = [{
 	password : '',
 	question : '',
 	answer : ''
+},{
+	id : 1,
+	fname : 'Derick',
+	lname : 'Melendez',
+	address : 'Carr 828 Km 2.2',
+	city : 'Toa Alta',
+	state : 'PR',
+	country : 'US',
+	zipcode : '00953-8130',
+	phone : '7874008093',
+	username : 'macalao914',
+	email : 'macalao914@yahoo.com',
+	password : '123',
+	question : 'question',
+	answer : 'answer'
 }];
 
 function adduser(arr) {
@@ -73,8 +88,8 @@ exports.home = function(req, res) {
 	if ( typeof req.session.username == 'undefined')
 		res.render('index.html');
 	else {
-
-		res.send(req.session.username);
+		var user = findByUsername(req.session.username);
+		res.send(user.fname+" "+user.lname);
 	}
 };
 
@@ -102,5 +117,11 @@ exports.register = function(req, res) {
 	adduser(temp);
 	res.render("signedUp.html");
 
+};
+
+exports.account = function(req,res){
+	res.render("account.html");
+	
+	
 };
 

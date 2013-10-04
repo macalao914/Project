@@ -34,6 +34,9 @@ app.post('/user', store.home_post_handler);
 
 app.post('/register', store.register);
 
+app.get('/account', store.account);
+
+
 //User logout, back to home page
 app.get('/logout', function(req, res) {
     // delete the session variable
