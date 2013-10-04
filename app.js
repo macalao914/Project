@@ -24,20 +24,23 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+//Home page
 app.get('/', store.home);
+
+//User page, user logged in
 app.post('/user', store.home_post_handler);
-// display the list of item
-app.get('/items', store.items);
-// show individual item
-app.get('/item/:id', store.item);
-// show general pages
-app.get('/page', store.page);
+
+app.post('/user', store.home_post_handler);
+
+app.post('/register', store.register);
+
+//User logout, back to home page
 app.get('/logout', function(req, res) {
     // delete the session variable
     delete req.session.username;
-    // redirect user to homepage
     res.render('index.html');
 });
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

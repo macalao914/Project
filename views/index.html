@@ -18,7 +18,7 @@
 				<h1>BigBox</h1>
 
 				<a href="#login" data-rel="dialog"  class="ui-btn-right" >Login</a>
-				<a href="#signUp" data-rel="dialog" class="ui-btn-left">Signup</a>
+				<a href="#signUp" data-rel="dialog" class="ui-btn-left">Register</a>
 			</div>
 
 			<div align="center">
@@ -68,22 +68,76 @@
 
 			<div data-role="content" data-inset="true">
 
-				<label for="name">First Name:</label>
-				<input type="text" name="firsname" id="firstname" value=""  />
+				<form action="/register" method="post">
 
-				<label for="name">Last Name:</label>
-				<input type="text" name="firsname" id="lastname" value=""  />
+					<div data-role="collapsible-set">
 
-				<label for="email">Email:</label>
-				<input type="email" name="email" id="emailUser" value=""  />
+						<div data-role="collapsible" data-collapsed="false">
 
-				<label for="password">Password:</label>
-				<input type="password" name="password" id="passwordUser" value="" />
+							<h3>Personal Information</h3>
 
-				<label for="password">Confirm Password:</label>
-				<input type="password" name="password" id="passwordConf" value="" />
+							<div data-role="fieldcontain">
 
-				<input id="Submit2" type="submit" value="Login" data-role="button" data-inline="true" data-theme="b" />
+								<div data-role="fieldcontain">
+									<input align="left"  type="text" id="fname" name="fname" placeholder="First Name"  />
+								</div>
+
+								<div data-role="fieldcontain">
+									<input  align="left" type="text" id="lname" name="lname" placeholder="Last Name" />
+								</div>
+
+								<div data-role="fieldcontain">
+									<input  align="left" type="text" id="address" name="address" placeholder="Street Address" />
+								</div>
+								<div data-role="fieldcontain">
+									<input  align="left" type="text" id="city" name="city" placeholder="City" />
+								</div>
+								<div data-role="fieldcontain">
+									<input  align="left" type="text" id="state" name="state" placeholder="State" />
+								</div>
+								<input  align="left" type="text" id="Country" name="country" placeholder="Country" />
+							</div>
+
+							<div data-role="fieldcontain">
+								<input  align="left" type="text" id="zip" name="zipcode" placeholder="ZIP Code" />
+							</div>
+							<div data-role="fieldcontain">
+								<input  align="left" type="text" id="phone" name="phone" placeholder="Phone Number" />
+							</div>
+
+						</div>
+
+						<div data-role="collapsible">
+							<h3>Account Information</h3>
+							<div data-role="fieldcontain">
+								<input type="text" id="new_username" name="new_username" placeholder="Username" />
+							</div>
+							<div data-role="fieldcontain">
+								<input  align="left" type="text" id="email" name="email" placeholder="Email" />
+							</div>
+							<div data-role="fieldcontain">
+								<input  align="left" type="password" id="password" name="new_password" placeholder="Password" />
+							</div>
+							<div data-role="fieldcontain">
+								<input  align="left" type="password"  id="renter" name="renter" placeholder="Re-Password" />
+							</div>
+							<div data-role="fieldcontain">
+								<input type="text" id="question" name="question" placeholder="Security Question" />
+							</div>
+							<div data-role="fieldcontain">
+								<input type="text" id="answer" name="answer" placeholder="Answer" />
+							</div>
+
+						</div>
+
+					</div>
+
+					<div>
+						<input type="submit" data-inline="true" data-theme="b" value="Submit"/>
+
+					</div>
+
+				</form>
 
 			</div>
 		</div>

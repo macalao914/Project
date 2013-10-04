@@ -1,43 +1,61 @@
-// our 'database'
-var items = {
-	SKN : {
-		name : 'Shuriken',
-		price : 100
-	},
-	ASK : {
-		name : 'Ashiko',
-		price : 690
-	},
-	CGI : {
-		name : 'Chigiriki',
-		price : 250
-	},
-	NGT : {
-		name : 'Naginata',
-		price : 900
-	},
-	KTN : {
-		name : 'Katana',
-		price : 1000
-	}
+var users = [{
+	id : 0,
+	fname : 'Guest',
+	lname : '',
+	address : '',
+	city : '',
+	state : '',
+	country : '',
+	zipcode : '',
+	phone : '',
+	username : '',
+	email : '',
+	password : '',
+	question : '',
+	answer : ''
+}];
+
+function adduser(arr) {
+
+	users = users.concat({
+		id : users.length,
+		fname : arr[0],
+		lname : arr[1],
+		address : arr[2],
+		city : arr[3],
+		state : arr[4],
+		country : arr[5],
+		zipcode : arr[6],
+		phone : arr[7],
+		username : arr[8],
+		email : arr[9],
+		password : arr[10],
+		question : arr[11],
+		answer : arr[12]
+	});
+
+	return users[users.length - 1];
 };
 
-var users = [{
-	id : -1,
-	username : 'Guest',
-	password : 'none',
-	email : ''
-}, {
-	id : 1,
-	username : 'bob',
-	password : 'secret',
-	email : 'bob@example.com'
-}, {
-	id : 2,
-	username : 'joe',
-	password : 'birthday',
-	email : 'joe@example.com'
-}];
+function isValid(arr, renter) {
+
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i].length == 0)
+			return "Form is not complete.";
+	};
+
+	if (arr[10] != renter)
+		return "Passwords don't match.";
+
+	for (var i = 0; i < users.length; i++) {
+		if (arr[8] == users[i])
+			return "Username " + arr[8] + " is already taken.";
+		else if (arr[9] == users[i])
+			return "Email " + arr[9] + " is already registerd.";
+	};
+
+	return "valid";
+}
 
 function findByUsername(username) {
 	for (var i = 0, len = users.length; i < len; i++) {
@@ -54,7 +72,6 @@ exports.home = function(req, res) {
 	// if user is not logged in, ask them to login
 	if ( typeof req.session.username == 'undefined')
 		res.render('index.html');
-	// if user is logged in already, take them straight to the items list
 	else {
 
 		res.send(req.session.username);
@@ -64,6 +81,7 @@ exports.home = function(req, res) {
 // handler for form submitted from homepage
 exports.home_post_handler = function(req, res) {
 	// if the username is not submitted, give it a default of "Anonymous"
+	console.log(req.body);
 	user = findByUsername(req.body.username);
 	// store the username as a session variable
 
@@ -74,46 +92,15 @@ exports.home_post_handler = function(req, res) {
 		res.render("index.html");
 };
 
-// handler for displaying the items
-exports.items = function(req, res) {
-	// don't let nameless people view the items, redirect them back to the homepage
-	if ( typeof req.session.username == 'undefined')
-		res.redirect('/');
-	else
-		res.render('items', {
-			title : 'Ninja Store - Items',
-			username : req.session.username,
-			items : items
-		});
-};
-
-// handler for displaying individual items
-exports.item = function(req, res) {
-	// don't let nameless people view the items, redirect them back to the homepage
-	if ( typeof req.session.username == 'undefined')
-		res.redirect('/');
-	else {
-		var name = items[req.params.id].name;
-		var price = items[req.params.id].price;
-		res.render('item', {
-			title : 'Ninja Store - ' + name,
-			username : req.session.username,
-			name : name,
-			price : price
-		});
+exports.register = function(req, res) {
+	var temp = new Array(req.body.fname, req.body.lname, req.body.address, req.body.city, req.body.state, req.body.country, req.body.zipcode, req.body.phone, req.body.new_username, req.body.email, req.body.new_password, req.body.question, req.body.answer);
+	var val = isValid(temp,req.body.renter);
+	if (val != "valid"){
+		res.send(val);
 	}
+		
+	adduser(temp);
+	res.render("signedUp.html");
+
 };
 
-// handler for showing simple pages
-exports.page = function(req, res) {
-	var name = req.query.name;
-	var contents = {
-		about : 'Ninja Store sells the coolest ninja stuff in the world. Anyone shopping here is cool.',
-		contact : 'You can contact us at <address><strong>Ninja Store</strong>,<br>1, World Ninja Headquarters,<br>Ninja Avenue,<br>NIN80B7-JP,<br>Nihongo.</address>'
-	};
-	res.render('page', {
-		title : 'Ninja Store - ' + name,
-		username : req.session.username,
-		content : contents[name]
-	});
-};
