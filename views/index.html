@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+	<head>
+		<title>My Page</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="stylesheet" href="stylesheets/jquery.mobile-1.3.1.css" />
+		<link rel="stylesheet" href="stylesheets/themes/purple.min.css" />
+		<script src="js/jquery-1.10.2.js"></script>
+		<script src="js/jquery.mobile-1.3.2.js"></script>
+		<script src="js/test.js"></script>
+		<script src="js/utils.js"></script>
+
+	</head>
+	<body>
+		<!-- homepage -->
+		<div data-role="page" id="home">
+			<div data-role="header" data-nobackbtn="true">
+				<h1>BigBox</h1>
+
+				<a href="#login" data-rel="dialog"  class="ui-btn-right" >Login</a>
+				<a href="#signUp" data-rel="dialog" class="ui-btn-left">Signup</a>
+			</div>
+
+			<div align="center">
+				<img src="images/generic_background.png"/>
+			</div>
+			<div align="center"  class="home_tagline">
+				Service sharing from anywhere
+			</div>
+			<a href="#search">Search</a>
+		</div>
+		</div>
+
+		<!-- login page -->
+		<div data-role="page" id="login">
+
+			<div data-role="header" data-nobackbtn="true">
+				<h1>Login</h1>
+			</div>
+
+			<div data-role="content" data-inset="true">
+
+				<form id="login_form" action = "/user" method="post" >
+					<div>
+						<input type="text" id="username" name="username" placeholder="Username"/>
+					</div>
+					<div>
+						<input type="password" id="password" name="password" placeholder="Password"/>
+					</div>
+					<div>
+						<input type="submit" data-inline="true" data-theme="b" value="Log In"/>
+
+					</div>
+
+				</form>
+				<hr />
+				Don't have a login? <a href="#signUp" data-rel="dialog">Sign Up</a>
+			</div>
+		</div>
+
+		<!-- Sign up page -->
+
+		<div data-role="page" id="signUp">
+
+			<div data-role="header" data-nobackbtn="true">
+				<h1>Registration Form</h1>
+			</div>
+
+			<div data-role="content" data-inset="true">
+
+				<label for="name">First Name:</label>
+				<input type="text" name="firsname" id="firstname" value=""  />
+
+				<label for="name">Last Name:</label>
+				<input type="text" name="firsname" id="lastname" value=""  />
+
+				<label for="email">Email:</label>
+				<input type="email" name="email" id="emailUser" value=""  />
+
+				<label for="password">Password:</label>
+				<input type="password" name="password" id="passwordUser" value="" />
+
+				<label for="password">Confirm Password:</label>
+				<input type="password" name="password" id="passwordConf" value="" />
+
+				<input id="Submit2" type="submit" value="Login" data-role="button" data-inline="true" data-theme="b" />
+
+			</div>
+		</div>
+
+		<!-- Search page -->
+		<div id ="search" data-role="page">
+			<div data-role="header" data-theme="a" data-position="fixed">
+				<h1>Items</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Items for Sales</h3>
+				<ul id="items-list" data-role="listview" data-inset="true"></ul>
+
+			</div>
+		</div>
+	</body>
+
+</html>
