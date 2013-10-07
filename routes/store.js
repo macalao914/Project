@@ -1,20 +1,30 @@
 var users = [{
-	id : 0,
-	fname : 'Guest',
-	lname : '',
-	address : '',
-	city : '',
-	state : '',
-	country : '',
-	zipcode : '',
-	phone : '',
-	username : '',
-	email : '',
-	password : '',
-	question : '',
-	answer : ''
-},{
 	id : 1,
+	fname : 'Frasisco',
+	lname : 'Dechoudens',
+	address : 'abc',
+	city : 'Humacao',
+	state : 'PR',
+	country : 'US',
+	zipcode : '00980',
+	phone : '7875555555',
+	username : 'legendario',
+	email : 'frankie@somewhere.who',
+	password : 'qwe',
+	question : 'question',
+	answer : 'answer',
+	bids : ['item1', 'item2', 'item3', 'item4'],
+	sold : ['sold1', 'sold2', 'sold3', 'sold4'],
+	cc : [{
+		type : 'type1',
+		num : '1234567890',
+		exp : '11/18',
+		cardName : 'FRANSISCO DECHOUDENS',
+		billAddress : 'address1'
+	}],
+	isAdmin : true
+}, {
+	id : 2,
 	fname : 'Derick',
 	lname : 'Melendez',
 	address : 'Carr 828 Km 2.2',
@@ -27,7 +37,17 @@ var users = [{
 	email : 'macalao914@yahoo.com',
 	password : '123',
 	question : 'question',
-	answer : 'answer'
+	answer : 'answer',
+	bids : ['item1', 'item2', 'item3', 'item4'],
+	sold : ['sold1', 'sold2', 'sold3', 'sold4'],
+	cc : [{
+		type : 'type1',
+		num : '1234567890',
+		exp : '11/18',
+		cardName : 'DERICK MELENDEZ MEDINA',
+		billAddress : 'address1'
+	}],
+	isAdmin : false
 }];
 
 function adduser(arr) {
@@ -72,6 +92,13 @@ function isValid(arr, renter) {
 	return "valid";
 }
 
+function isLoggedIn(user) {
+	if (user == undefined)
+		return false;
+	else
+		return true;
+
+};
 function findByUsername(username) {
 	for (var i = 0, len = users.length; i < len; i++) {
 		var user = users[i];
@@ -82,15 +109,15 @@ function findByUsername(username) {
 	return users[0];
 }
 
-// handler for homepage
 exports.home = function(req, res) {
 	// if user is not logged in, ask them to login
 	if ( typeof req.session.username == 'undefined')
 		res.render('index.html');
 	else {
 		var user = findByUsername(req.session.username);
-		res.send(user.fname+" "+user.lname);
+		res.send(user);
 	}
+	//catch bug when reloading site after user is logged in
 };
 
 // handler for form submitted from homepage
@@ -109,19 +136,54 @@ exports.home_post_handler = function(req, res) {
 
 exports.register = function(req, res) {
 	var temp = new Array(req.body.fname, req.body.lname, req.body.address, req.body.city, req.body.state, req.body.country, req.body.zipcode, req.body.phone, req.body.new_username, req.body.email, req.body.new_password, req.body.question, req.body.answer);
-	var val = isValid(temp,req.body.renter);
-	if (val != "valid"){
+	var val = isValid(temp, req.body.renter);
+	if (val != "valid") {
 		res.send(val);
 	}
-		
+
 	adduser(temp);
 	res.render("signedUp.html");
 
 };
 
-exports.account = function(req,res){
-	res.render("account.html");
-	
-	
+exports.user = function(req, res) {
+	if (!isLoggedIn(req.session.username))
+		res.render('#login');
+	else
+		res.render('user.html');
+
 };
+
+exports.account = function(req, res) {
+
+	if (!isLoggedIn(req.session.username)) {
+		res.render('index.html');
+	}
+	else
+		res.render("account.html");
+
+};
+
+exports.account_buying = function(req, res) {
+
+	res.render("account/buying.html");
+
+};
+
+exports.account_selling = function(req, res) {
+	res.render("account/selling.html");
+
+};
+
+exports.account_watching = function(req, res) {
+	res.render("account/watching.html");
+
+};
+
+
+exports.account_administrator = function(req, res) {
+	res.render("account/admin.html");
+
+};
+
 

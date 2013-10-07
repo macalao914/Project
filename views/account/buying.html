@@ -7,8 +7,8 @@
 		<link rel="stylesheet" href="stylesheets/themes/purple.min.css" />
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery.mobile-1.3.2.js"></script>
-		<script src="js/app_item.js"></script>
-		<script src="js/app.js"></script>
+		<script src="js/test.js"></script>
+		<script src="js/utils.js"></script>
 
 	</head>
 	<body>
@@ -17,20 +17,18 @@
 			<div class="user_header" data-role="header" data-nobackbtn="true">
 				<h1>BigBox</h1>
 				<script type="text/javascript">
-				$.ajax({
+					$.ajax({
 				url : "/",
 				contentType : "application/json",
 				success : function(data, textStatus, jqXHR) {
 				$(".user_header").append('<a href="/account" data-rel="page"  class="ui-btn-left"style="color: #FFFFFF" >Welcome! ' + data.fname+' '+data.lname +'</a>');
 $('.account').append('Account: '+data.id);
 				if(data.isAdmin){
-					console.log("isadmin");
-				$('#navbar_user').hide();
-				$('#navbar_admin').show();
+				$('#navbar_user2').hide();
+				$('#navbar_admin2').show();
 				}else{
-					console.log("no admin");
-				$('#navbar_user').show();
-				$('#navbar_admin').hide();
+				$('#navbar_user2').show();
+				$('#navbar_admin2').hide();
 				}
 
 				$('#home').page();
@@ -41,11 +39,11 @@ $('.account').append('Account: '+data.id);
 
 				}
 				});
-
 				</script>
-				<a href="/logout" data-role="button" class="ui-btn-right" >Log Out </a>
+				<a href="/logout" data-role="button" class="ui-btn-right">Log Out </a>
 
-				<div id="navbar_user" data-role="navbar" data-role="header" >
+
+				<div id="navbar_user2" data-role="navbar" data-role="header" >
 
 					<ul>
 						<li>
@@ -63,7 +61,7 @@ $('.account').append('Account: '+data.id);
 					</ul>
 				</div>
 
-				<div id="navbar_admin" data-role="navbar" data-role="header" >
+				<div id="navbar_admin2" data-role="navbar" data-role="header" >
 
 					<ul>
 						<li>
@@ -78,12 +76,48 @@ $('.account').append('Account: '+data.id);
 							<a href="/account/selling" data-role="button">Selling</a>
 						</li>
 
-						<li>
+					<li>
 							<a href="/account/administrator" data-role="button" >Administrator Options</a>
 						</li>
 
 					</ul>
 				</div>
+
+			</div>
+			<p class="account"></p>
+
+			<div >
+				<ul data-role="listview" data-theme="d" data-divider-theme="d" >
+					<li data-role="list-divider" role="heading">
+						Bidding
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Offers
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Purchase History
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Didn't Win
+					</li>
+					<li>
+						Something else
+					</li>
+
+				</ul>
+
 			</div>
 
 		</div>

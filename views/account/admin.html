@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<title>My Page</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="stylesheet" href="stylesheets/jquery.mobile-1.3.1.css" />
+		<link rel="stylesheet" href="stylesheets/themes/purple.min.css" />
+		<script src="js/jquery-1.10.2.js"></script>
+		<script src="js/jquery.mobile-1.3.2.js"></script>
+		<script src="js/test.js"></script>
+		<script src="js/utils.js"></script>
+
+	</head>
+	<body >
+		<!-- homepage -->
+		<div data-role="page" id="home">
+			<div class="user_header" data-role="header" data-nobackbtn="true">
+				<h1>BigBox</h1>
+				<script type="text/javascript">
+$.ajax({
+url : "/",
+contentType : "application/json",
+success : function(data, textStatus, jqXHR) {
+$(".user_header").append('<a href="/account" data-rel="page"  class="ui-btn-left"style="color: #FFFFFF" >Welcome! ' + data.fname+' '+data.lname +'</a>');
+$('.account').append('Account: '+data.id);
+if(data.isAdmin){
+console.log("w isadmin");
+$('#navbar_admin4').show();
+$('#navbar_user4').hide();
+}else{
+console.log("w no admin");
+$('#navbar_user4').show();
+$('#navbar_admin4').hide();
+}
+
+$('#home').page();
+
+},
+error : function(data, textStatus, jqXHR) {
+console.log("try again");
+
+}
+});
+				</script>
+
+				<a href="/logout" data-role="button" class="ui-btn-right" >Log Out </a>
+
+				<div id="navbar_user4" data-role="navbar" data-role="header" >
+
+					<ul>
+						<li>
+							<a href="/account/watching" data-role="button">Watching</a>
+						</li>
+
+						<li>
+							<a href="/account/buying" data-role="button">Buying</a>
+						</li>
+
+						<li>
+							<a href="/account/selling" data-role="button">Selling</a>
+						</li>
+
+					</ul>
+				</div>
+
+				<div id="navbar_admin4" data-role="navbar" data-role="header" >
+
+					<ul>
+						<li>
+							<a href="/account/watching" data-role="button">Watching</a>
+						</li>
+
+						<li>
+							<a href="/account/buying" data-role="button">Buying</a>
+						</li>
+
+						<li>
+							<a href="/account/selling" data-role="button">Selling</a>
+						</li>
+
+						<li>
+							<a href="/account/administrator" data-role="button" >Administrator Options</a>
+						</li>
+
+					</ul>
+				</div>
+
+				<div >
+					<ul data-role="listview" data-theme="d" data-divider-theme="d" >
+						<li data-role="list-divider" role="heading">Users</li>
+							<li><a href="a">Change User Privliges</a></li>
+							<li><a href="b">Remove User</a>	</li>
+							<li><a href="c">Recover Password</a></li>
+							
+						<li data-role="list-divider" role="heading">Categories</li>
+						<li><a href="a">Add Category</a></li>
+						<li><a href="b">Remove Category</a></li>
+						<li><a href="c">Change Category</a></li>
+
+						<li data-role="list-divider" role="heading">Reports</li>
+						<li><a href="a">View Reports</a></li>
+
+					</ul>
+
+				</div>
+
+			</div>
+
+			<p class="account"></p>
+
+		</div>
+	</body>
+
+</html>

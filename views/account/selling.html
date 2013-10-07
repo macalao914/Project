@@ -7,8 +7,8 @@
 		<link rel="stylesheet" href="stylesheets/themes/purple.min.css" />
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery.mobile-1.3.2.js"></script>
-		<script src="js/app_item.js"></script>
-		<script src="js/app.js"></script>
+		<script src="js/test.js"></script>
+		<script src="js/utils.js"></script>
 
 	</head>
 	<body>
@@ -24,13 +24,11 @@
 				$(".user_header").append('<a href="/account" data-rel="page"  class="ui-btn-left"style="color: #FFFFFF" >Welcome! ' + data.fname+' '+data.lname +'</a>');
 $('.account').append('Account: '+data.id);
 				if(data.isAdmin){
-					console.log("isadmin");
-				$('#navbar_user').hide();
-				$('#navbar_admin').show();
+				$('#navbar_user3').hide();
+				$('#navbar_admin3').show();
 				}else{
-					console.log("no admin");
-				$('#navbar_user').show();
-				$('#navbar_admin').hide();
+				$('#navbar_user3').show();
+				$('#navbar_admin3').hide();
 				}
 
 				$('#home').page();
@@ -41,11 +39,11 @@ $('.account').append('Account: '+data.id);
 
 				}
 				});
-
 				</script>
+
 				<a href="/logout" data-role="button" class="ui-btn-right" >Log Out </a>
 
-				<div id="navbar_user" data-role="navbar" data-role="header" >
+				<div id="navbar_user3" data-role="navbar" data-role="header" >
 
 					<ul>
 						<li>
@@ -63,7 +61,7 @@ $('.account').append('Account: '+data.id);
 					</ul>
 				</div>
 
-				<div id="navbar_admin" data-role="navbar" data-role="header" >
+				<div id="navbar_admin3" data-role="navbar" data-role="header" >
 
 					<ul>
 						<li>
@@ -84,9 +82,66 @@ $('.account').append('Account: '+data.id);
 
 					</ul>
 				</div>
+
 			</div>
+			<p class="account"></p>
+			<div >
+				<ul data-role="listview" data-theme="d" data-divider-theme="d" >
+					<li data-role="list-divider" role="heading">
+						Drafts
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Active Listings
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Best Offers
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Sold
+					</li>
+					<li>
+						Something else
+					</li>
+					<li data-role="list-divider" role="heading">
+						Unsold
+					</li>
+					<li>
+						Something else
+					</li>
+
+					<li data-role="list-divider" role="heading">
+						Scheduled
+					</li>
+					<li>
+						Something else
+					</li>
+
+				</ul>
+
+			</div>
+			<a href="index.html" data-role="button" data-inline="true">Sell Item</a>
 
 		</div>
+		
+			<div>
+				
+			<a href="index.html" data-role="button" data-inline="true">Upload Photo</a>
+			<a href="index.html" data-role="button" data-inline="true">Set Price</a>
+			<a href="index.html" data-role="button" data-inline="true">Description</a>
+
+			</div>
 
 	</body>
 
